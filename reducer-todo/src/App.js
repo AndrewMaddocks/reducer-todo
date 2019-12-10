@@ -10,14 +10,16 @@ function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const addTodo = item =>
     dispatch({ type: "ADD_NEW_TODO_ITEM", payload: item });
+  const toggleCompleted = id => dispatch({ type: "TOGGLE_COMPLETE", id: id });
+  const clearCompleted = () => dispatch({ type: "CLEAR_COMPLETED" });
   console.log(state.todoItem);
 
   return (
     <div className="App">
       <div>
         <h1>Todo List</h1>
-        <TodoForm addTodo={addTodo} />
-        <TodoList todoItem={state.todoItem} />
+        <TodoForm addTodo={addTodo} clearCompleted={clearCompleted} />
+        <TodoList todoItem={state.todoItem} toggleCompleted={toggleCompleted} />
       </div>
     </div>
   );
